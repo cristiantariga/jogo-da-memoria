@@ -16,6 +16,7 @@
 		7301F7C4266D3FE700251960 /* jogoDaMemoriaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7301F7C3266D3FE700251960 /* jogoDaMemoriaUITests.swift */; };
 		7301F7D5266D403400251960 /* JogoDaMemoriaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7301F7D4266D403400251960 /* JogoDaMemoriaViewController.xib */; };
 		730CDED3266D8735004A6720 /* Tabuleiro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730CDED2266D8735004A6720 /* Tabuleiro.swift */; };
+		738D81E52674296400FD2EBD /* Int+Carta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 738D81E42674296400FD2EBD /* Int+Carta.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		7301F7C5266D3FE700251960 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7301F7D4266D403400251960 /* JogoDaMemoriaViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JogoDaMemoriaViewController.xib; sourceTree = "<group>"; };
 		730CDED2266D8735004A6720 /* Tabuleiro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabuleiro.swift; sourceTree = "<group>"; };
+		738D81E42674296400FD2EBD /* Int+Carta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Carta.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				7301F7AF266D3FE700251960 /* Info.plist */,
 				7301F7D4266D403400251960 /* JogoDaMemoriaViewController.xib */,
 				730CDED2266D8735004A6720 /* Tabuleiro.swift */,
+				738D81E42674296400FD2EBD /* Int+Carta.swift */,
 			);
 			path = jogoDaMemoria;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 				730CDED3266D8735004A6720 /* Tabuleiro.swift in Sources */,
 				7301F7A2266D3FE600251960 /* AppDelegate.swift in Sources */,
 				7301F7A4266D3FE600251960 /* SceneDelegate.swift in Sources */,
+				738D81E52674296400FD2EBD /* Int+Carta.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

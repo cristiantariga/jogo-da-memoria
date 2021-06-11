@@ -18,21 +18,41 @@ class JogoDaMemoriaViewController: UIViewController {
 
     @IBOutlet public var TodasAsCartas: [UIButton]!
     
+    @IBAction func ReiniciarButtonView(_ sender: Any) {
+        reiniciar()
+    }
+    
+    @IBAction func ToqueNaCarta(_ sender: UIButton) {
+        if let identificador = sender.accessibilityIdentifier {
+            
+            let tentativaAtualNaoDuplicada = !tabuleiro.tentativaAtual.contains(Int(identificador)!)
+            let tentativaAtualAindaNaoAcertada = !tabuleiro.indicesEncontrados.contains(Int(identificador)!)
+            
+            if( tentativaAtualNaoDuplicada && tentativaAtualAindaNaoAcertada){
+                sender.setImage(
+                    UIImage(named: sender.storedImage!), for: .normal
+                )
+                tabuleiro.memorizarTentativa(tentativa: Int(identificador)!)
+                recarregarCartas(cartaAtual: identificador)
+            }
+            
+        }
+    }
+    
     func reiniciar() {
         tabuleiro = Tabuleiro()
         inicializarCartasViradasParaBaixo()
     }
     
-    
     func recarregarCartas(cartaAtual: String) {
         TodasAsCartas.forEach { carta in
-            if let indentificador = carta.accessibilityIdentifier {
+            if let identificador = carta.accessibilityIdentifier {
                 
-                let indiceAindaNaoEncontrado = !self.tabuleiro.indicesEncontrados.contains(Int(indentificador)!)
+                let indiceAindaNaoEncontrado = !self.tabuleiro.indicesEncontrados.contains(Int(identificador)!)
                 
                 if(indiceAindaNaoEncontrado && self.tabuleiro.podeAbaixarCartas) {
                     if(carta.accessibilityIdentifier != cartaAtual) {
-                        carta.setImage(UIImage(named: "Card"), for: .normal)
+                        carta.setImage(UIImage(named: 0.carta), for: .normal)
                     }
                 }
             }
@@ -43,44 +63,26 @@ class JogoDaMemoriaViewController: UIViewController {
         }
     }
     
-    @IBAction func ReiniciarButtonView(_ sender: Any) {
-        reiniciar()
-    }
-    
-    @IBAction func ToqueNaCarta(_ sender: UIButton) {
-        if let indentificador = sender.accessibilityIdentifier {
-            
-            let tentativaAtualNaoDuplicada = !tabuleiro.tentativaAtual.contains(Int(indentificador)!)
-            let tentativaAtualAindaNaoAcertada = !tabuleiro.indicesEncontrados.contains(Int(indentificador)!)
-            
-            if( tentativaAtualNaoDuplicada && tentativaAtualAindaNaoAcertada){
-                sender.setImage(
-                    UIImage(named: sender.guardImage!), for: .normal
-                )
-                tabuleiro.memorizarTentativa(tentativa: Int(indentificador)!)
-                recarregarCartas(cartaAtual: indentificador)
-            }
-            
-        }
-    }
-
+   
     func inicializarCartasViradasParaBaixo() {
         TodasAsCartas.forEach { carta in
             if(!tabuleiro.indicesEmbaralhados.isEmpty) {
                 
                 let identificador = tabuleiro.indicesEmbaralhados.removeLast()
 
-                carta.guardImage = tabuleiro.definirImagem(identificador: identificador)
+                carta.storedImage = identificador.carta
                 carta.accessibilityIdentifier = String(identificador)
-                carta.setImage(UIImage(named: "Card"), for: .normal)
+                carta.setImage(UIImage(named: 0.carta), for: .normal)
             }
         }
     }
     
     func notificarVitoria() {
+        let numeroDeTentativas = self.tabuleiro.numeroDeTentativas / 2
+        
         let alerta = UIAlertController(
             title: "Boa, você terminou!",
-            message: "Você precisou de \(self.tabuleiro.numeroDeTentativas / 2) tentativas para finalizar o jogo da memória",
+            message: "Você precisou de \(numeroDeTentativas) tentativas para finalizar o jogo da memória",
             preferredStyle: .alert
         )
         
@@ -99,18 +101,18 @@ class JogoDaMemoriaViewController: UIViewController {
 
 extension UIButton {
     private struct AssociatedKeys {
-        static var guardImage = ""
+        static var storedImage = ""
     }
 
-    @IBInspectable var guardImage: String? {
+    @IBInspectable var storedImage: String? {
         get {
-            return objc_getAssociatedObject(self, &AssociatedKeys.guardImage) as? String
+            return objc_getAssociatedObject(self, &AssociatedKeys.storedImage) as? String
         }
         set {
             if let newValue = newValue {
                 objc_setAssociatedObject(
                     self,
-                    &AssociatedKeys.guardImage,
+                    &AssociatedKeys.storedImage,
                     newValue as NSString?,
                     .OBJC_ASSOCIATION_RETAIN_NONATOMIC
                 )
