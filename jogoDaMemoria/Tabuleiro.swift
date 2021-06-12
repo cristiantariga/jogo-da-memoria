@@ -31,6 +31,10 @@ class Tabuleiro {
         }
     }
     
+    func vitoria() -> Bool {
+        return self.indicesEncontrados.count >= 10
+    }
+    
     func verificarCartasEncontradas() {
         
         let primeiraTentativa = self.tentativaAtual[0]

@@ -28,14 +28,13 @@ class JogoDaMemoriaViewController: UIViewController {
             let tentativaAtualNaoDuplicada = !tabuleiro.tentativaAtual.contains(Int(identificador)!)
             let tentativaAtualAindaNaoAcertada = !tabuleiro.indicesEncontrados.contains(Int(identificador)!)
             
-            if( tentativaAtualNaoDuplicada && tentativaAtualAindaNaoAcertada){
+            if( tentativaAtualNaoDuplicada && tentativaAtualAindaNaoAcertada) {
                 sender.setImage(
                     UIImage(named: sender.storedImage!), for: .normal
                 )
                 tabuleiro.memorizarTentativa(tentativa: Int(identificador)!)
                 recarregarCartas(cartaAtual: identificador)
             }
-            
         }
     }
     
@@ -58,7 +57,7 @@ class JogoDaMemoriaViewController: UIViewController {
             }
         }
         
-        if(self.tabuleiro.indicesEncontrados.count >= 10) {
+        if(self.tabuleiro.vitoria()) {
             notificarVitoria()
         }
     }
